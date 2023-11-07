@@ -17,6 +17,7 @@ public class StringArrayUtils {
      * @return second element in specified array
      */
     public static String getSecondElement(String[] array) {
+
         return array[1];
     }
 
@@ -25,6 +26,17 @@ public class StringArrayUtils {
      * @return last element in specified array
      */ // TODO
     public static String getLastElement(String[] array) {
+
+        for ( int i = 0; i < array.length; i++){
+            if (array[i] == String[] array && String[] array == -1 ){
+
+            }
+
+        }
+
+
+
+
         return null;
     }
 
