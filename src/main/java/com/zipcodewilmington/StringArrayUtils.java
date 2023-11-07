@@ -35,7 +35,7 @@ public class StringArrayUtils {
      * @return second to last element in specified array
      */ // TODO
     public static String getSecondToLastElement(String[] array) {
-        return array[] ;
+        return array[array.length -2 ] ;
     }
 
     /**
@@ -44,10 +44,10 @@ public class StringArrayUtils {
      * @return true if the array contains the specified `value`
      */ // TODO
     public static boolean contains(String[] array, String value) {
-        return false;
+        return array[ array];
     }
 
-    /**
+    /*
      * @param array of String objects
      * @return an array with identical contents in reverse order
      */ // TODO
