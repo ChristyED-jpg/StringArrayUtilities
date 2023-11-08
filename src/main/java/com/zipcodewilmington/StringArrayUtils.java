@@ -1,5 +1,7 @@
 package com.zipcodewilmington;
 
+import java.util.Arrays;
+
 /**
  * Created by leon on 1/29/18.
  */
@@ -61,8 +63,11 @@ public class StringArrayUtils {
      * @return an array with identical contents in reverse order
      */ // TODO
     public static String[] reverse(String[] array) {
+        StringBuilder string = new StringBuilder(Arrays.toString(array));
 
         return null;
+
+
     }
 
     /**
