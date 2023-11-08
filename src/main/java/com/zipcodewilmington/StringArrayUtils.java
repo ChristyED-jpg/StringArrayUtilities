@@ -1,6 +1,8 @@
 package com.zipcodewilmington;
 
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 
 /**
  * Created by leon on 1/29/18.
@@ -29,7 +31,7 @@ public class StringArrayUtils {
      */ // TODO
     public static String getLastElement(String[] array) {
 
-        return array[ array.length - 1];
+        return array[array.length - 1];
     }
 
     /**
@@ -37,7 +39,7 @@ public class StringArrayUtils {
      * @return second to last element in specified array
      */ // TODO
     public static String getSecondToLastElement(String[] array) {
-        return array[array.length -2 ] ;
+        return array[array.length - 2];
     }
 
     /**
@@ -48,10 +50,10 @@ public class StringArrayUtils {
     public static boolean contains(String[] array, String value) {
         boolean contains = false;
         int i;
-        for (i = 0; i < array.length; i++){
-        if (array[i] == value) {
-            return true;
-        }
+        for (i = 0; i < array.length; i++) {
+            if (array[i] == value) {
+                return true;
+            }
         }
 
 
@@ -63,9 +65,20 @@ public class StringArrayUtils {
      * @return an array with identical contents in reverse order
      */ // TODO
     public static String[] reverse(String[] array) {
-        StringBuilder string = new StringBuilder(Arrays.toString(array));
+       /* // convert array to list
+        List<String> list = Arrays.asList(array);
 
-        return null;
+        // reverse the list
+        Collections.reverse(list);
+        // convert the list back to array
+        String[] result = list.toArray(new String[0]);
+
+        // return array
+        return result;*/
+        Collections.reverse(Arrays.asList(array));
+        return array;
+
+
 
 
     }
