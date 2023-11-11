@@ -142,8 +142,6 @@ public class StringArrayUtils {
                 count += 1;
         }
     }
-
-
         return count;
     }
 
@@ -153,14 +151,31 @@ public class StringArrayUtils {
      * @return array with identical contents excluding values of `value`
      */ // TODO
     public static String[] removeValue(String[] array, String valueToRemove) {
-        return null;
+     String[] newArr = new String [array.length - 1];
+     for(int i =0, k = 0; i < array.length;i++ ){
+         if( array[i].equals(valueToRemove)){
+          continue;
+         }
+         newArr [k++] = array[i];
+
+     }
+
+        return newArr;
     }
 
     /**
      * @param array array of chars
      * @return array of Strings with consecutive duplicates removes
      */ // TODO
+
     public static String[] removeConsecutiveDuplicates(String[] array) {
+
+        // return array of string without the consecutive Duplicate
+        //
+       String [] consecut
+
+
+
         return null;
     }
 
