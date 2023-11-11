@@ -111,12 +111,23 @@ public class StringArrayUtils {
      */ // TODO
 
     public static boolean isPangramic(String[] array) {
-       boolean pangramic = true;
+        boolean[] alphabetPresent = new boolean[26]; // 26 letters in the  alphabet
+        for (String str : array) {
+            String cleanedString = str.replaceAll("", "").toLowerCase();
+            for (char c : cleanedString.toCharArray()) {
+                if ('a' <= c && c <= 'z') {
+                    int index = c - 'a';
+                    alphabetPresent[index] = true;
+                }
+            }
+        }
+        for ( boolean present: alphabetPresent){
+            if(!present){
+                return false;
+            }
+        }
 
-
-
-
-        return false;
+        return true;
     }
 
     /**
@@ -125,7 +136,15 @@ public class StringArrayUtils {
      * @return number of occurrences the specified `value` has occurred
      */ // TODO
     public static int getNumberOfOccurrences(String[] array, String value) {
-        return 0;
+        int count = 0;
+        for (String arr : array) {
+            if (arr == value){
+                count += 1;
+        }
+    }
+
+
+        return count;
     }
 
     /**
