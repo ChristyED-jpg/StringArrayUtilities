@@ -30,8 +30,8 @@ public class StringArrayUtils {
      * @return last element in specified array
      */ // TODO
     public static String getLastElement(String[] array) {
-
         return array[array.length - 1];
+
     }
 
     /**
@@ -65,21 +65,24 @@ public class StringArrayUtils {
      * @return an array with identical contents in reverse order
      */ // TODO
     public static String[] reverse(String[] array) {
-       /* // convert array to list
+     /*   // convert array to list
         List<String> list = Arrays.asList(array);
-
         // reverse the list
         Collections.reverse(list);
         // convert the list back to array
         String[] result = list.toArray(new String[0]);
-
         // return array
         return result;*/
-        Collections.reverse(Arrays.asList(array));
-        return array;
+     int arrayLength = array.length/2;
+     for( int i = 0 ; i < arrayLength; i++){
+         int num = array.length - 1 -i;
+         String temp = array[i];
+         array[i]= array[num];
+         array[num]= temp;
+     }
 
 
-
+      return array;
 
     }
 
@@ -88,14 +91,31 @@ public class StringArrayUtils {
      * @return true if the order of the array is the same backwards and forwards
      */ // TODO
     public static boolean isPalindromic(String[] array) {
-        return false;
+        // return true if  the same backwards and forward.
+        boolean palindromic = false;
+        for (int i = 0; i < array.length / 2; i++) {
+            if (array[i] != array[array.length - i - 1]) {
+                return false;
+
+            } else {
+                return true;
+            }
+        }
+
+        return palindromic;
     }
 
     /**
      * @param array array of String objects
      * @return true if each letter in the alphabet has been used in the array
      */ // TODO
+
     public static boolean isPangramic(String[] array) {
+       boolean pangramic = true;
+
+
+
+
         return false;
     }
 
@@ -109,7 +129,7 @@ public class StringArrayUtils {
     }
 
     /**
-     * @param array         array of String objects
+     * @param array array of String objects
      * @param valueToRemove value to remove from array
      * @return array with identical contents excluding values of `value`
      */ // TODO
