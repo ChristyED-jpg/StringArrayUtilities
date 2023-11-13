@@ -73,16 +73,16 @@ public class StringArrayUtils {
         String[] result = list.toArray(new String[0]);
         // return array
         return result;*/
-     int arrayLength = array.length/2;
-     for( int i = 0 ; i < arrayLength; i++){
-         int num = array.length - 1 -i;
-         String temp = array[i];
-         array[i]= array[num];
-         array[num]= temp;
-     }
+        int arrayLength = array.length / 2;
+        for (int i = 0; i < arrayLength; i++) {
+            int num = array.length - 1 - i;
+            String temp = array[i];
+            array[i] = array[num];
+            array[num] = temp;
+        }
 
 
-      return array;
+        return array;
 
     }
 
@@ -109,7 +109,6 @@ public class StringArrayUtils {
      * @param array array of String objects
      * @return true if each letter in the alphabet has been used in the array
      */ // TODO
-
     public static boolean isPangramic(String[] array) {
         boolean[] alphabetPresent = new boolean[26]; // 26 letters in the  alphabet
         for (String str : array) {
@@ -121,8 +120,8 @@ public class StringArrayUtils {
                 }
             }
         }
-        for ( boolean present: alphabetPresent){
-            if(!present){
+        for (boolean present : alphabetPresent) {
+            if (!present) {
                 return false;
             }
         }
@@ -138,27 +137,27 @@ public class StringArrayUtils {
     public static int getNumberOfOccurrences(String[] array, String value) {
         int count = 0;
         for (String arr : array) {
-            if (arr == value){
+            if (arr == value) {
                 count += 1;
+            }
         }
-    }
         return count;
     }
 
     /**
-     * @param array array of String objects
+     * @param array         array of String objects
      * @param valueToRemove value to remove from array
      * @return array with identical contents excluding values of `value`
      */ // TODO
     public static String[] removeValue(String[] array, String valueToRemove) {
-     String[] newArr = new String [array.length - 1];
-     for(int i =0, k = 0; i < array.length;i++ ){
-         if( array[i].equals(valueToRemove)){
-          continue;
-         }
-         newArr [k++] = array[i];
+        String[] newArr = new String[array.length - 1];
+        for (int i = 0, k = 0; i < array.length; i++) {
+            if (array[i].equals(valueToRemove)) {
+                continue;
+            }
+            newArr[k++] = array[i];
 
-     }
+        }
 
         return newArr;
     }
@@ -167,7 +166,6 @@ public class StringArrayUtils {
      * @param array array of chars
      * @return array of Strings with consecutive duplicates removes
      */ // TODO
-
     public static String[] removeConsecutiveDuplicates(String[] array) {
 
         // return array of string without the consecutive Duplicate
@@ -177,12 +175,12 @@ public class StringArrayUtils {
         String prev = "";
         Integer count = 0;
 
-        for(int i =1; i< array.length; i++){ //  start at 1 to skip the 1st iteration to avoid index out of bounds error
-             current = array[i];  //set to variable and  pull value.
-           if ( i == 1 ){
-               prev = array[i-1];
-           }
-            if (current.equals(prev)){
+        for (int i = 1; i < array.length; i++) { //  start at 1 to skip the 1st iteration to avoid index out of bounds error
+            current = array[i];  //set to variable and  pull value.
+            if (i == 1) {
+                prev = array[i - 1];
+            }
+            if (current.equals(prev)) {
                 // remove the Consecutive duplicate
                 array[i] = null;
                 count = count + 1;
@@ -191,11 +189,11 @@ public class StringArrayUtils {
         }
 
         //Create a new array to move the non-null values
-           String [] result = new String [array.length - count];
+        String[] result = new String[array.length - count];
         int newIndex = 0;// new index because result array is different size
-        for( int i = 0; i< array.length; i++){
-            if(array[i] != (null)){
-                result [newIndex] = array[i] ;
+        for (int i = 0; i < array.length; i++) {
+            if (array[i] != (null)) {
+                result[newIndex] = array[i];
                 newIndex++;
             }
         }
@@ -203,98 +201,53 @@ public class StringArrayUtils {
         return result;
     }
 
+
     /**
      * @param array array of chars
      * @return array of Strings with each consecutive duplicate occurrence concatenated as a single string in an array of Strings
      */ // TODO
     public static String[] packConsecutiveDuplicates(String[] array) {
-       String [] packArray = new String[array.length];
-       int index = 0;
 
-       boolean [] isDuplicate = new boolean [array.length];
-     for(int i=0; i< array.length; i++) {
-         if (isDuplicate[i]) {
-             continue;
-         }
+        // check for empty or null array
+        if ( array == null || array.length == 0){
+            return new String[0];
+        }
+        int compressedledLength = 1;
 
-         String current = array[i];
-         String packString = current;
-         for (int j = i + 1; j < array.length; j++) {
-             String lookForward = array[j];
-             if (current.equals(lookForward)) {
-                 isDuplicate[j] = true;
-                 packString = packString + lookForward;
-             }
-             if(!current.equals(lookForward)){
-                 packArray[index] = packString;
-                 index++;
-             }
-         }
+        // Count the number of compressed elements
+        // {b,d,b,b,d,a,a} => {b,d,bb,d,aa}
+        for ( int i =1 ; i < array.length; i ++){
+            if (!array[i].equals(array[i-1])){
+                compressedledLength++;
+            }
 
-         packArray[index] = packString;
-         index++;
-     }
+        }
+        //create the result arrray
+        String[] result = new String[compressedledLength];
+        int resultIndex= 0;
+        //{b, b, b, a, d, a, c, c} => {bbb , a, d, a}
+        //{1. 2. 3. 4. 5. 6. 7} : {0. 1. 2. 3. 4}
+        resultIndex = 4;
+        for( int i = 0; i < array.length; i++){
+            // if the current element equal to the previous one. append it to the current string
+            if(array[i].equals(array[i -1])){
+                result[resultIndex] += array[i];
 
-     String [] result = new String[index];
-       Integer resultIndex = 0;
-     for(int i = 0; i < packArray.length; i++){
-         String item = packArray[i];
-         if( item != null){
-             result [resultIndex] = item;//
-             resultIndex++;
-         }
-     }
-
+            }else{
+                // if not. start a new compressed string
+            }resultIndex++;
+            result[resultIndex] = array[i];
+        }
 
 
         return result;
     }
 
-
-
-
-
-
-
-
-
-
-    public static String[] packDuplicates(String[] array) { // This version is an interview question
-        String [] packArray = new String[array.length];
-        int index = 0;
-
-        boolean [] isDuplicate = new boolean [array.length];
-        for(int i=0; i< array.length; i++) {
-            if (isDuplicate[i]) {
-                continue;
-            }
-
-            String current = array[i];
-            String packString = current;
-            for (int j = i + 1; j < array.length; j++) {
-                String lookForward = array[j];
-                if (current.equals(lookForward)) {
-                    isDuplicate[j] = true;
-                    packString = packString + lookForward;
-                }
-            }
-
-            packArray[index] = packString;
-            index++;
-        }
-
-        String [] result = new String[index];
-        Integer resultIndex = 0;
-        for(int i = 0; i < packArray.length; i++){
-            String item = packArray[i];
-            if( item != null){
-                result [resultIndex] = item;//
-                resultIndex++;
-            }
-        }
-
-
-
-        return result;
-    }
 }
+
+
+
+
+
+
+
