@@ -171,12 +171,36 @@ public class StringArrayUtils {
     public static String[] removeConsecutiveDuplicates(String[] array) {
 
         // return array of string without the consecutive Duplicate
-        //
-       String [] consecut
 
+        // Identifies consecutive duplicate.
+        String current;
+        String prev = "";
+        Integer count = 0;
 
+        for(int i =1; i< array.length; i++){ //  start at 1 to skip the 1st iteration to avoid index out of bounds error
+             current = array[i];  //set to variable and  pull value.
+           if ( i == 1 ){
+               prev = array[i-1];
+           }
+            if (current.equals(prev)){
+                // remove the Consecutive duplicate
+                array[i] = null;
+                count = count + 1;
+            }
+            prev = current;
+        }
 
-        return null;
+        //Create a new array to move the non-null values
+           String [] result = new String [array.length - count];
+        int newIndex = 0;// new index because result array is different size
+        for( int i = 0; i< array.length; i++){
+            if(array[i] != (null)){
+                result [newIndex] = array[i] ;
+                newIndex++;
+            }
+        }
+
+        return result;
     }
 
     /**
@@ -184,8 +208,93 @@ public class StringArrayUtils {
      * @return array of Strings with each consecutive duplicate occurrence concatenated as a single string in an array of Strings
      */ // TODO
     public static String[] packConsecutiveDuplicates(String[] array) {
-        return null;
+       String [] packArray = new String[array.length];
+       int index = 0;
+
+       boolean [] isDuplicate = new boolean [array.length];
+     for(int i=0; i< array.length; i++) {
+         if (isDuplicate[i]) {
+             continue;
+         }
+
+         String current = array[i];
+         String packString = current;
+         for (int j = i + 1; j < array.length; j++) {
+             String lookForward = array[j];
+             if (current.equals(lookForward)) {
+                 isDuplicate[j] = true;
+                 packString = packString + lookForward;
+             }
+             if(!current.equals(lookForward)){
+                 packArray[index] = packString;
+                 index++;
+             }
+         }
+
+         packArray[index] = packString;
+         index++;
+     }
+
+     String [] result = new String[index];
+       Integer resultIndex = 0;
+     for(int i = 0; i < packArray.length; i++){
+         String item = packArray[i];
+         if( item != null){
+             result [resultIndex] = item;//
+             resultIndex++;
+         }
+     }
+
+
+
+        return result;
     }
 
 
+
+
+
+
+
+
+
+
+    public static String[] packDuplicates(String[] array) { // This version is an interview question
+        String [] packArray = new String[array.length];
+        int index = 0;
+
+        boolean [] isDuplicate = new boolean [array.length];
+        for(int i=0; i< array.length; i++) {
+            if (isDuplicate[i]) {
+                continue;
+            }
+
+            String current = array[i];
+            String packString = current;
+            for (int j = i + 1; j < array.length; j++) {
+                String lookForward = array[j];
+                if (current.equals(lookForward)) {
+                    isDuplicate[j] = true;
+                    packString = packString + lookForward;
+                }
+            }
+
+            packArray[index] = packString;
+            index++;
+        }
+
+        String [] result = new String[index];
+        Integer resultIndex = 0;
+        for(int i = 0; i < packArray.length; i++){
+            String item = packArray[i];
+            if( item != null){
+                result [resultIndex] = item;//
+                resultIndex++;
+            }
+        }
+
+
+
+        return result;
+    }
 }
